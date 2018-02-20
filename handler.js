@@ -1,10 +1,10 @@
 'use strict';
 const Telegraph = require('telegraf')
 const bot = new Telegraph(process.env.BOT_TOKEN)
-bot.on('text', (ctx) => {
-  console.log(ctx.from)
+bot.on('message', (ctx) => {
   let from = ctx.from
-  return ctx.replyWithHTML(`<b>Hello ${from.first_name} ${from.last_name}</b>`)
+  let message = ctx.update.message
+  return ctx.replyWithHTML(`<b>Hello ${from.first_name} ${from.last_name}</b>\n<em>You say:</em> ${message.text}`)
 })
 bot.telegram.setWebhook(process.env.WEBHOOK_URL + '/secret-path')
 
