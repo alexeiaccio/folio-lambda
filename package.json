@@ -8,6 +8,7 @@
     "aws-sdk": "^2.202.0",
     "express": "^4.16.2",
     "serverless-http": "^1.5.3",
+    "telegra.ph": "^0.2.0",
     "telegraf": "^3.18.0"
   },
   "devDependencies": {
