@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "serverless.yml",
   "license": "MIT",
+  "node": "6.10",
   "dependencies": {
     "@jimdo/serverless-dotenv": "^1.0.0",
     "aws-sdk": "^2.202.0",

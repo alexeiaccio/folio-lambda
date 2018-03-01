@@ -16,9 +16,7 @@ app.get('/', function (req, res) {
 })
 
 bot.use(
-  //require('./bot/commands'),
-  //require('./bot/actions'),
-  require('./bot/handlers'),
+  require('./bot/handlers')
 )
 
 if (IS_OFFLINE === 'true') {

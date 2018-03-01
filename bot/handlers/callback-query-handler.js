@@ -2,7 +2,7 @@ const Telegraph = require('telegra.ph')
 const Router = require('telegraf/router')
 const options = require('../options')
 const dynamoDb = require('../db')
-const { getPages } = require('../utils/text-helpers')
+const getPages = require('../utils/text-helpers')
 const getPagination = require('../utils/get-pagination')
 const getOptions = require('../utils/get-options')
 

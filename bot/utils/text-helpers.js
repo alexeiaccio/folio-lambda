@@ -1,4 +1,4 @@
-const filterTags = tag => {
+const filterTags = (tag) => {
   if (tag === 'b' || tag === 'strong' || tag === 'i' || tag === 'em' || tag === 'a' || tag === 'code' || tag === 'pre') {
     filteredTag = tag
   } else if (tag === 'h3' || tag === 'h4') {
@@ -11,16 +11,16 @@ const filterTags = tag => {
   return filteredTag
 }
 
-const includedRegExp = /[<.+?>.+?](<.+?>)(.+?)(<\/.+?>)[.+?<\/.+?>]/g
+const clearContent = (content) => {  
+  const includedRegExp = /[<.+?>.+?](<.+?>)(.+?)(<\/.+?>)[.+?<\/.+?>]/g  
+  const replacer = (str, first, second, third, offset, s) => `>${second}<`
 
-const replacer = (str, first, second, third, offset, s) => `>${second}<`
-
-const clearContent = content => 
-  content
+  return content
     .replace(includedRegExp,  replacer)
     .replace(/(\n)+/g , '\n')
+}
 
-const parseContent = children => {
+const parseContent = (children) => {
   let parsed = ''
   children.map(node => {    
     let tag = filterTags(node.tag)
@@ -33,9 +33,9 @@ const parseContent = children => {
   return parsed
 }
 
-const getContent = content => clearContent(parseContent([{'tag': 'div', 'children': content}]))
+const getContent = (content) => (clearContent(parseContent([{'tag': 'div', 'children': content}])))
 
-const findBreakTag = str => {
+const findBreakTag = (str) => {
   let endRegExp = /(<(\/??)(\w+)[\s.*]?>)[^>]*?$/gm
   let startRegExp = /^.*?[^<]?(<(\/??)(\w+).*?>)/gm
   matchEnd = endRegExp.exec(str)
@@ -47,9 +47,9 @@ const findBreakTag = str => {
   return str
 }
 
-const getMaxPage = text => Math.floor(text.split('').length / 600)
+const getMaxPage = (text) => (Math.floor(text.split('').length / 600))
 
-const getParts = text => {
+const getParts = (text) => {
   let parts = []
   const wordArray = text.split(' ')
   const letterCount = text.split('').length
@@ -65,8 +65,6 @@ const getParts = text => {
   return parts
 }
 
-const getPages = content => getParts(getContent(content))
+const getPages = (content) => (getParts(getContent(content)))
 
-module.exports = {
-  getPages
-}
+module.exports = getPages

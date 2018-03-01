@@ -1,13 +1,13 @@
 const Telegraph = require('telegra.ph')
 const options = require('../options')
 const dynamoDb = require('../db')
-const { getPages } = require('../utils/text-helpers')
+const getPages = require('../utils/text-helpers')
 const getPagination = require('../utils/get-pagination')
 
 const client = new Telegraph()
 const PAGES_TABLE = process.env.PAGES_TABLE
 
-const inlineQueryHandler = ctx => {
+const inlineQueryHandler = (ctx) => {
   let inlineQuery = ctx.update.inline_query
   let query = inlineQuery.query  
 
@@ -28,7 +28,7 @@ const inlineQueryHandler = ctx => {
       let pages = getPages(page.content)
       let maxPage = pages.length
 
-      pages.forEach(page => {
+      pages.forEach((page) => {
         const params = {
           TableName: PAGES_TABLE,
           Item: {
@@ -63,13 +63,13 @@ const inlineQueryHandler = ctx => {
         }
       )
     }).catch((err) => {
-      /* if (err.toString().search(/PAGE/)) {
+      if (err.toString().search(/PAGE/)) {
         title = `Page not found.`
         description = `Try other pathway...`
-      } else { */
+      } else {
         title = 'Error...'
         description = `${err}`
-      //}
+      }
       return ctx.answerInlineQuery(
         [{
           type: 'article',
@@ -84,7 +84,7 @@ const inlineQueryHandler = ctx => {
         {
           cache_time: 200
         }
-      )
+      )      
     })
   }
 }
